@@ -24,7 +24,7 @@ function App() {
 
   const categories = [
     "All",
-    ...new Set(allPhotosAlbum.photos.map((photo) => photo.category)),
+    ...new Set(selectedAlbum.photos.map((photo) => photo.category)),
   ];
 
   const getInitialTheme = () => {
@@ -323,7 +323,7 @@ ${darkMode ? "bg-zinc-950 text-zinc-100" : "bg-stone-100 text-zinc-900"}`}
               : "bg-gray-200 text-gray-800 hover:bg-gray-300"
         }`}
               >
-                {cat} 
+                {cat}
               </button>
             ))}
           </div>
