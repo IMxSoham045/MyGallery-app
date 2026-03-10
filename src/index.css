@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-album {
+  animation: fadeInLeft 0.35s ease forwards;
+}
+
+@keyframes loadingBar {
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 60%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-loadingBar {
+  animation: loadingBar 2s ease-in-out infinite;
+}
+
+/* DARK MODE GLOBAL */
+.dark body {
+  background-color: #111827;
+  color: white;
+}
+
+.dark .card {
+  background-color: #1f2937;
+}
+
+.dark .sidebar {
+  background-color: #111827;
+}
