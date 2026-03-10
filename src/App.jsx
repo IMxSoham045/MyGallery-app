@@ -314,7 +314,7 @@ ${darkMode ? "bg-zinc-950 text-zinc-100" : "bg-stone-100 text-zinc-900"}`}
               <button
                 key={cat}
                 onClick={() => setCategory(cat)}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all
+                className={`cursor-pointer px-4 py-1.5 rounded-full text-sm font-medium transition-all
         ${
           category === cat
             ? "bg-indigo-600 text-white shadow-md"
