@@ -22,9 +22,23 @@ function App() {
   const [themeColor, setThemeColor] = useState("#2563eb");
   const [category, setCategory] = useState("All");
 
+  const albums = [allPhotosAlbum, ...albumData];
+
+  const filteredAlbums =
+    category === "All"
+      ? albums
+      : albumData.filter((album) =>
+          album.photos.some((photo) => photo.category === category),
+        );
+
+  const handleCategoryChange = (cat) => {
+    setCategory(cat);
+    setCurrentPage(1);
+  };
+
   const categories = [
     "All",
-    ...new Set(selectedAlbum.photos.map((photo) => photo.category)),
+    ...new Set(selectedAlbum.photos.map((p) => p.category)),
   ];
 
   const getInitialTheme = () => {
@@ -46,11 +60,13 @@ function App() {
 
     const matchesSearch =
       photo.title.toLowerCase().includes(text) ||
-      photo.photographer.toLowerCase().includes(text);
+      (photo.photographer || "").toLowerCase().includes(text);
 
-    const matchesCategory = category === "All" || photo.category === category;
+    if (category === "All") {
+      return matchesSearch;
+    }
 
-    return matchesSearch && matchesCategory;
+    return matchesSearch && photo.category === category;
   });
 
   const indexOfLastPhoto = currentPage * photosPerPage;
@@ -146,6 +162,14 @@ function App() {
   }, [search, selectedAlbum, category]);
 
   useEffect(() => {
+    const uniqueCategories = [
+      ...new Set(selectedAlbum.photos.map((photo) => photo.category)),
+    ];
+
+    setCategory(uniqueCategories.length > 1 ? "All" : uniqueCategories[0]);
+  }, [selectedAlbum]);
+
+  useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
@@ -163,8 +187,8 @@ function App() {
     <div className={darkMode ? "dark" : ""}>
       <main
         className={`flex flex-col md:flex-row min-h-screen font-sans overflow-hidden
-transition-colors duration-500 ease-in-out
-${darkMode ? "bg-zinc-950 text-zinc-100" : "bg-stone-100 text-zinc-900"}`}
+                    transition-colors duration-500 ease-in-out
+                    ${darkMode ? "bg-zinc-950 text-zinc-100" : "bg-stone-100 text-zinc-900"}`}
       >
         {/* Mobile top bar */}
         <div
@@ -264,6 +288,18 @@ ${darkMode ? "bg-zinc-950 text-zinc-100" : "bg-stone-100 text-zinc-900"}`}
 
                       setSelectedAlbum(album);
 
+                      const uniqueCategories = [
+                        ...new Set(album.photos.map((photo) => photo.category)),
+                      ];
+
+                      setCategory(
+                        uniqueCategories.length > 1
+                          ? "All"
+                          : uniqueCategories[0],
+                      );
+
+                      setCurrentPage(1);
+
                       if (window.innerWidth < 768) {
                         setSidebarOpen(false);
                       }
@@ -313,7 +349,7 @@ ${darkMode ? "bg-zinc-950 text-zinc-100" : "bg-stone-100 text-zinc-900"}`}
             {categories.map((cat) => (
               <button
                 key={cat}
-                onClick={() => setCategory(cat)}
+                onClick={() => handleCategoryChange(cat)}
                 className={`cursor-pointer px-4 py-1.5 rounded-full text-sm font-medium transition-all
         ${
           category === cat
