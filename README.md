@@ -150,3 +150,5 @@ Tailwind CSS v4 is used via `@import "tailwindcss"` in `index.css` — ensure yo
 ## 📄 License
 
 MIT — free to use and modify.
+
+Disclamier:- Made by ME And AI.
