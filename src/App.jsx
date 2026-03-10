@@ -36,10 +36,11 @@ function App() {
     setCurrentPage(1);
   };
 
-  const categories = [
-    "All",
-    ...new Set(selectedAlbum.photos.map((p) => p.category)),
-  ];
+  const categories = (() => {
+    const unique = [...new Set(selectedAlbum.photos.map((p) => p.category))];
+
+    return unique.length > 1 ? ["All", ...unique] : unique;
+  })();
 
   const getInitialTheme = () => {
     const savedTheme = localStorage.getItem("theme");
