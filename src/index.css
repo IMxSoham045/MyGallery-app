@@ -59,3 +59,188 @@
 .dark .sidebar {
   background-color: #111827;
 }
+
+/* Main loader */
+.spider-loader {
+  position: relative;
+  min-height: 100vh;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: white;
+}
+
+/* Web background */
+.web-background {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.15) 1px,
+    transparent 1px
+  );
+  background-size: 40px 40px;
+}
+
+/* Spider */
+.spider {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform-origin: top;
+  animation: swing 3s ease-in-out infinite;
+}
+
+.web-line {
+  width: 2px;
+  height: 150px;
+  background: white;
+}
+
+.spider-body {
+  width: 18px;
+  height: 18px;
+  background: red;
+  border-radius: 50%;
+}
+
+/* Swing animation */
+@keyframes swing {
+  0% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
+}
+
+/* Title */
+.spider-title {
+  font-size: 40px;
+  font-weight: 800;
+  margin-bottom: 50px;
+  color: #ff2b2b;
+}
+
+/* Glitch effect */
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: "SPIDER GALLERY";
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.glitch::before {
+  color: #00ffff;
+  transform: translate(2px);
+  animation: glitch 2s infinite;
+}
+
+.glitch::after {
+  color: #ff00ff;
+  transform: translate(-2px);
+  animation: glitch 3s infinite;
+}
+
+@keyframes glitch {
+  0% {
+    clip-path: inset(0 0 80% 0);
+  }
+  25% {
+    clip-path: inset(20% 0 40% 0);
+  }
+  50% {
+    clip-path: inset(40% 0 20% 0);
+  }
+  75% {
+    clip-path: inset(10% 0 60% 0);
+  }
+  100% {
+    clip-path: inset(0 0 80% 0);
+  }
+}
+
+/* Photos grid */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 120px);
+  gap: 30px;
+}
+
+/* Photo item */
+.photo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.photo-web {
+  width: 2px;
+  height: 40px;
+  background: white;
+}
+
+.photo-item img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  transition: transform 0.4s;
+}
+
+.photo-item img:hover {
+  transform: scale(1.1);
+}
+
+/* Loading text */
+.loading-text {
+  margin-top: 40px;
+  letter-spacing: 3px;
+  opacity: 0.7;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+.spiderman-sticker {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  width: 120px;
+  animation: floatSpidey 4s ease-in-out infinite;
+  z-index: 20;
+}
+
+@keyframes floatSpidey {
+  0% {
+    transform: translateY(0px) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(5deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(-5deg);
+  }
+}
