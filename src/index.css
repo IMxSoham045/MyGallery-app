@@ -1,246 +1,245 @@
 @import "tailwindcss";
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* ---------------- LOADER CONTAINER ---------------- */
 
-.animate-fadeIn {
-  animation: fadeIn 0.4s ease-in-out;
-}
-
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.animate-album {
-  animation: fadeInLeft 0.35s ease forwards;
-}
-
-@keyframes loadingBar {
-  0% {
-    width: 0%;
-  }
-  50% {
-    width: 60%;
-  }
-  100% {
-    width: 100%;
-  }
-}
-
-.animate-loadingBar {
-  animation: loadingBar 2s ease-in-out infinite;
-}
-
-/* DARK MODE GLOBAL */
-.dark body {
-  background-color: #111827;
-  color: white;
-}
-
-.dark .card {
-  background-color: #1f2937;
-}
-
-.dark .sidebar {
-  background-color: #111827;
-}
-
-/* Main loader */
 .spider-loader {
   position: relative;
   min-height: 100vh;
-  background: #000;
+  background: radial-gradient(circle at top, #0f172a, #000);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   overflow: hidden;
   color: white;
 }
 
-/* Web background */
+/* ---------------- WEB BACKGROUND ---------------- */
+
 .web-background {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.15) 1px,
-    transparent 1px
-  );
-  background-size: 40px 40px;
+  opacity: 0.25;
+
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+    linear-gradient(
+      45deg,
+      transparent 48%,
+      rgba(255, 255, 255, 0.08) 50%,
+      transparent 52%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 48%,
+      rgba(255, 255, 255, 0.08) 50%,
+      transparent 52%
+    );
+
+  background-size:
+    40px 40px,
+    120px 120px,
+    120px 120px;
+
+  animation: webMove 20s linear infinite;
 }
 
-/* Spider */
-.spider {
+@keyframes webMove {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(120px);
+  }
+}
+
+/* ---------------- SPIDERMAN SWING ---------------- */
+
+.spiderman-swing {
+  position: absolute;
+  top: -120px;
+  left: -160px;
+  width: 120px;
+  z-index: 30;
+  animation: spidermanSwing 3.5s ease-in-out forwards;
+  transform-origin: top center;
+}
+
+@keyframes spidermanSwing {
+  0% {
+    transform: translate(-250px, -150px) rotate(-35deg);
+  }
+
+  40% {
+    transform: translate(40vw, 15vh) rotate(10deg);
+  }
+
+  70% {
+    transform: translate(80vw, -10vh) rotate(-10deg);
+  }
+
+  100% {
+    transform: translate(120vw, -120px) rotate(30deg);
+  }
+}
+
+/* ---------------- WEB SHOOT ---------------- */
+
+.web-shoot {
   position: absolute;
   top: 0;
   left: 50%;
-  transform-origin: top;
-  animation: swing 3s ease-in-out infinite;
+  width: 3px;
+  height: 0;
+  background: linear-gradient(to bottom, white, transparent);
+
+  animation: webShoot 1.2s ease-out forwards;
 }
 
-.web-line {
-  width: 2px;
-  height: 150px;
-  background: white;
-}
-
-.spider-body {
-  width: 18px;
-  height: 18px;
-  background: red;
-  border-radius: 50%;
-}
-
-/* Swing animation */
-@keyframes swing {
-  0% {
-    transform: rotate(-10deg);
+@keyframes webShoot {
+  from {
+    height: 0;
   }
-  50% {
-    transform: rotate(10deg);
-  }
-  100% {
-    transform: rotate(-10deg);
+  to {
+    height: 45vh;
   }
 }
 
-/* Title */
-.spider-title {
-  font-size: 40px;
-  font-weight: 800;
-  margin-bottom: 50px;
-  color: #ff2b2b;
-}
+/* ---------------- PHOTO GRID ---------------- */
 
-/* Glitch effect */
-.glitch {
-  position: relative;
-}
+.web-gallery {
+  margin-top: 140px;
 
-.glitch::before,
-.glitch::after {
-  content: "SPIDER GALLERY";
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
-.glitch::before {
-  color: #00ffff;
-  transform: translate(2px);
-  animation: glitch 2s infinite;
-}
-
-.glitch::after {
-  color: #ff00ff;
-  transform: translate(-2px);
-  animation: glitch 3s infinite;
-}
-
-@keyframes glitch {
-  0% {
-    clip-path: inset(0 0 80% 0);
-  }
-  25% {
-    clip-path: inset(20% 0 40% 0);
-  }
-  50% {
-    clip-path: inset(40% 0 20% 0);
-  }
-  75% {
-    clip-path: inset(10% 0 60% 0);
-  }
-  100% {
-    clip-path: inset(0 0 80% 0);
-  }
-}
-
-/* Photos grid */
-.photo-grid {
   display: grid;
-  grid-template-columns: repeat(3, 120px);
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 24px;
+
+  width: min(500px, 90%);
+  justify-items: center;
 }
 
-/* Photo item */
-.photo-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* ---------------- PHOTO CARD ---------------- */
+
+.web-photo {
+  opacity: 0;
+  transform: scale(0.6);
+  animation: photoStick 0.6s forwards;
 }
 
-.photo-web {
-  width: 2px;
-  height: 40px;
-  background: white;
+.web-photo:nth-child(1) {
+  animation-delay: 1.2s;
+}
+.web-photo:nth-child(2) {
+  animation-delay: 1.35s;
+}
+.web-photo:nth-child(3) {
+  animation-delay: 1.5s;
+}
+.web-photo:nth-child(4) {
+  animation-delay: 1.65s;
+}
+.web-photo:nth-child(5) {
+  animation-delay: 1.8s;
+}
+.web-photo:nth-child(6) {
+  animation-delay: 1.95s;
 }
 
-.photo-item img {
-  width: 120px;
-  height: 120px;
+.web-photo img {
+  width: 110px;
+  height: 110px;
   object-fit: cover;
+
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-  transition: transform 0.4s;
+
+  border: 2px solid rgba(255, 255, 255, 0.15);
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.8),
+    0 0 15px rgba(255, 0, 0, 0.3);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
-.photo-item img:hover {
-  transform: scale(1.1);
+.web-photo img:hover {
+  transform: scale(1.12) rotate(2deg);
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.9),
+    0 0 25px rgba(255, 0, 0, 0.6);
 }
 
-/* Loading text */
-.loading-text {
-  margin-top: 40px;
-  letter-spacing: 3px;
-  opacity: 0.7;
-  animation: pulse 2s infinite;
-}
+/* ---------------- PHOTO STICK ANIMATION ---------------- */
 
-@keyframes pulse {
+@keyframes photoStick {
   0% {
-    opacity: 0.4;
+    transform: scale(0.4) rotate(-25deg);
+    opacity: 0;
+  }
+
+  70% {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+/* ---------------- TITLE ---------------- */
+
+.loader-title {
+  margin-top: 50px;
+
+  font-size: 22px;
+  letter-spacing: 3px;
+
+  color: #f8fafc;
+
+  opacity: 0.85;
+
+  animation: pulseText 2s infinite;
+}
+
+/* ---------------- TEXT PULSE ---------------- */
+
+@keyframes pulseText {
+  0% {
+    opacity: 0.35;
   }
   50% {
     opacity: 1;
   }
   100% {
-    opacity: 0.4;
+    opacity: 0.35;
   }
 }
+
+/* ---------------- FLOATING STICKER ---------------- */
 
 .spiderman-sticker {
   position: absolute;
   bottom: 40px;
   right: 40px;
+
   width: 120px;
-  animation: floatSpidey 4s ease-in-out infinite;
-  z-index: 20;
+
+  animation: spideyFloat 4s ease-in-out infinite;
 }
 
-@keyframes floatSpidey {
+@keyframes spideyFloat {
   0% {
-    transform: translateY(0px) rotate(-5deg);
+    transform: translateY(0) rotate(-5deg);
   }
+
   50% {
-    transform: translateY(-15px) rotate(5deg);
+    transform: translateY(-18px) rotate(5deg);
   }
+
   100% {
-    transform: translateY(0px) rotate(-5deg);
+    transform: translateY(0) rotate(-5deg);
   }
 }

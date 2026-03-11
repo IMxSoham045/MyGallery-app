@@ -51,6 +51,49 @@
 
 // export default Loading;
 
+// import React, { useEffect, useState } from "react";
+// import { photos } from "../galleryData";
+// import spiderMan from "../assets/Spider-Man.png";
+
+// const Loading = () => {
+//   const [randomPhotos, setRandomPhotos] = useState([]);
+
+//   useEffect(() => {
+//     const shuffled = [...photos].sort(() => 0.5 - Math.random());
+//     setRandomPhotos(shuffled.slice(0, 6));
+//   }, []);
+
+//   return (
+//     <div className="spider-loader">
+//       {/* Web background */}
+//       <div className="web-background"></div>
+
+//       {/* Spider-Man Sticker */}
+//       <img src={spiderMan} alt="spiderman" className="spiderman-sticker" />
+
+//       <h1 className="spider-title">MY GALLERY</h1>
+
+//       {/* Hanging Photos */}
+//       <div className="photo-grid">
+//         {randomPhotos.map((photo) => (
+//           <div key={photo.id} className="photo-item">
+//             <div className="photo-web"></div>
+
+//             <img
+//               src={`${photo.imageUrl}?w=500&auto=format&fit=crop`}
+//               alt={photo.title}
+//             />
+//           </div>
+//         ))}
+//       </div>
+
+//       <p className="loading-text">Entering the MI-Verse...</p>
+//     </div>
+//   );
+// };
+
+// export default Loading;
+
 import React, { useEffect, useState } from "react";
 import { photos } from "../galleryData";
 import spiderMan from "../assets/Spider-Man.png";
@@ -65,20 +108,13 @@ const Loading = () => {
 
   return (
     <div className="spider-loader">
-      {/* Web background */}
-      <div className="web-background"></div>
+      {/* Web line */}
+      <div className="web-shoot"></div>
 
-      {/* Spider-Man Sticker */}
-      <img src={spiderMan} alt="spiderman" className="spiderman-sticker" />
-
-      <h1 className="spider-title">MY GALLERY</h1>
-
-      {/* Hanging Photos */}
-      <div className="photo-grid">
+      {/* Photos sticking to web */}
+      <div className="web-gallery">
         {randomPhotos.map((photo) => (
-          <div key={photo.id} className="photo-item">
-            <div className="photo-web"></div>
-
+          <div key={photo.id} className="web-photo">
             <img
               src={`${photo.imageUrl}?w=500&auto=format&fit=crop`}
               alt={photo.title}
@@ -87,7 +123,7 @@ const Loading = () => {
         ))}
       </div>
 
-      <p className="loading-text">Entering the MI-Verse...</p>
+      <h1 className="loader-title">Entering Gallery...</h1>
     </div>
   );
 };
